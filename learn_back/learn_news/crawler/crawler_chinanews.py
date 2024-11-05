@@ -4,7 +4,7 @@ from datetime import datetime, timedelta
 import pymysql
 import requests
 from bs4 import BeautifulSoup
-from learn_back.learn_news.crawler.db_config import db_config
+from db_config import db_config
 
 # 配置日志，输出到文件并同时输出到控制台
 logger = logging.getLogger()
@@ -58,7 +58,7 @@ def fetch_page(url):
         return None
 
 
-def parse_main_page(html):
+def parse_main_page(html, year):
     """解析主页面，提取新闻项"""
     soup = BeautifulSoup(html, "html.parser")
     news_items = []
@@ -86,8 +86,11 @@ def parse_main_page(html):
             title_text = ""
             link = ""
         time_text = time_.get_text(strip=True)
+        datetime_str = f"{year}-{time_text}"
+        datetime_obj = datetime.strptime(datetime_str, "%Y-%m-%d %H:%M")
+        formatted_time = datetime_obj.strftime("%Y-%m-%d %H:%M:%S")
         news_items.append(
-            {"category": category, "title": title_text, "link": link, "time": time_text}
+            {"category": category, "title": title_text, "link": link, "time": formatted_time}
         )
     return news_items
 
@@ -148,8 +151,8 @@ def save_to_mysql(data):
 
 def generate_dates(year):
     """生成指定年份的所有日期"""
-    start_date = datetime(year, 7, 21)
-    end_date = datetime(year, 9, 1)
+    start_date = datetime(year, 11, 4)
+    end_date = datetime(year, 11, 4)
     delta = timedelta(days=1)
     current_date = start_date
     while current_date <= end_date:
@@ -173,7 +176,7 @@ def main():
             continue
 
         # 解析主页面，获取新闻列表
-        news_list = parse_main_page(main_page)
+        news_list = parse_main_page(main_page, year)
         logging.info(f"找到 {len(news_list)} 条新闻")
 
         for news in news_list:

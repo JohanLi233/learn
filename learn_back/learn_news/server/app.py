@@ -1,7 +1,10 @@
 from flask import Flask, jsonify
 from flask_mysqldb import MySQL
+from flask_cors import CORS
+import MySQLdb.cursors
 
 app = Flask(__name__)
+CORS(app) 
 
 # 配置 MySQL 数据库连接
 app.config["MYSQL_HOST"] = "localhost"  # 数据库主机
@@ -15,7 +18,19 @@ mysql = MySQL(app)  # 初始化 MySQL
 
 @app.route("/")
 def hello_world():
-    return "<p>Hello, World!</p>"
+    return "<p>Back-end server is running.</p>"
+
+@app.route("/recent_news", methods=['GET'])
+def get_recent_news():
+    try:
+        cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+        cur.execute("SELECT id, title, time FROM `news` ORDER BY `time` DESC LIMIT 10;")  # Fetch only necessary fields
+        results = cur.fetchall()  # Fetch all results
+        cur.close()  # Close the cursor
+        return jsonify(results), 200  # Return JSON response with HTTP status code 200
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        return jsonify({"error": "An error occurred while fetching news"}), 500
 
 
 @app.route("/news/<id>")
