@@ -4,7 +4,7 @@ from datetime import datetime, timedelta
 import pymysql
 import requests
 from bs4 import BeautifulSoup
-from config import db_config
+from learn_back.learn_news.crawler.db_config import db_config
 
 # 配置日志，输出到文件并同时输出到控制台
 logger = logging.getLogger()
