@@ -1,0 +1,6 @@
+.news-item {
+    border: 1px solid #ccc; /* 边框 */
+    padding: 10px;          /* 内边距 */
+    text-align: left;       /* 左对齐 */
+  }
+  
