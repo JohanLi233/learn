@@ -3,9 +3,8 @@
 ## 后端
 - Python Flask
 - MySQL
-- 爬虫
 ### 爬虫
-- 中国新闻网和新浪新闻
+- 爬取中国新闻网和新浪新闻
 ## 前端
 - react ts
 - vite
