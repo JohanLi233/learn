@@ -40,3 +40,12 @@
 .read-the-docs {
   color: #888;
 }
+
+body {
+  background: url('../assets/background.jpg') no-repeat center center fixed; /* 替换为您的背景图像路径 */
+  background-size: cover; /* 覆盖整个背景 */
+}
+
+.transparent-container {
+  background-color: rgba(0, 0, 0, 0.5); /* 半透明黑色背景 */
+}

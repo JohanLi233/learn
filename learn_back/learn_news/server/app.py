@@ -20,11 +20,12 @@ mysql = MySQL(app)  # 初始化 MySQL
 def hello_world():
     return "<p>Back-end server is running.</p>"
 
-@app.route("/recent_news", methods=['GET'])
-def get_recent_news():
+@app.route("/recent_news/<amount>", methods=['GET'])
+def get_recent_news(amount):
     try:
         cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-        cur.execute("SELECT id, title, time FROM `news` ORDER BY `time` DESC LIMIT 10;")  # Fetch only necessary fields
+        sql = "SELECT id, title, time FROM `news` ORDER BY `time` DESC LIMIT " + str(amount)
+        cur.execute(sql)
         results = cur.fetchall()  # Fetch all results
         cur.close()  # Close the cursor
         return jsonify(results), 200  # Return JSON response with HTTP status code 200

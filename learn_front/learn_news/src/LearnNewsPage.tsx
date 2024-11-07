@@ -4,7 +4,8 @@ import "./css/news-item.css";
 interface NewsItem {
   id: number;
   title: string;
-  // 你可以在这里添加更多字段
+  date: string;
+  link: string;
 }
 
 const LearnNewsPage: React.FC = () => {
@@ -15,8 +16,7 @@ const LearnNewsPage: React.FC = () => {
   useEffect(() => {
     const fetchNews = async () => {
       try {
-        console.log("Fetching news...");
-        const response = await fetch("http://127.0.0.1:1234/recent_news");
+        const response = await fetch("http://127.0.0.1:1234/recent_news/30");
         if (!response.ok) {
           throw new Error(
             `Network response was not ok: ${response.statusText}`
@@ -37,9 +37,9 @@ const LearnNewsPage: React.FC = () => {
 
   if (loading || error) {
     return (
-      <div className="d-flex justify-content-center align-items-center vh-10 mt-4">
+      <div className="d-flex justify-content-center align-items-center">
         <div className="text-center">
-          <h1>Learn News Page</h1>
+          {/* <h1>Learn News Page</h1> */}
           <div className="">
             {loading ? "Loading..." : `Error: ${error}`}
           </div>
@@ -50,9 +50,9 @@ const LearnNewsPage: React.FC = () => {
 
 
   return (
-    <div className="d-flex justify-content-center align-items-center vh-10 mt-4">
+    <div className="d-flex justify-content-center align-items-center">
       <div className="text-center">
-        <h1>Learn News Page</h1>
+        <h1>新闻列表</h1>
         <ul className="list-unstyled">
           {newsData.map((newsItem) => (
             <li key={newsItem.id} className="mb-3">

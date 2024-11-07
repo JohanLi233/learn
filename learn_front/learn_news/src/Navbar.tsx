@@ -14,7 +14,8 @@ const navLinks: NavLink[] = [
 
 export default function Navbar() {
   return (
-    <BootstrapNavbar bg="dark" variant="dark" expand="lg">
+    <BootstrapNavbar bg="dark" variant="dark" expand="lg" className = "fixed-top">
+    {/* <BootstrapNavbar bg="dark" variant="dark" expand="lg">  */}
       <Nav className="me-auto center-nav">
         {" "}
         {navLinks.map((link) => (
