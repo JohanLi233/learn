@@ -1,12 +1,32 @@
 import React, { useEffect, useState } from "react";
 import "./css/news-item.css";
+import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc";
+
+dayjs.locale("zh-cn");
+dayjs.extend(utc);
 
 interface NewsItem {
   id: number;
   title: string;
-  date: string;
+  time: string;
   link: string;
 }
+
+const formatChineseDate = (mysqlDateString: string) => {
+  const date = dayjs(mysqlDateString).utcOffset(0);
+  const now = dayjs().utcOffset(0);
+
+  if (date.isSame(now, "day")) {
+    return "今天 " + date.format("HH:mm");
+  } else if (date.isSame(now.subtract(1, "day"), "day")) {
+    return "昨天 " + date.format("HH:mm");
+  } else if (date.isSame(now, "year")) {
+    return date.format("M月D日 HH:mm");
+  } else {
+    return date.format("YYYY年M月D日 HH:mm");
+  }
+};
 
 const LearnNewsPage: React.FC = () => {
   const [newsData, setNewsData] = useState<NewsItem[]>([]);
@@ -39,15 +59,11 @@ const LearnNewsPage: React.FC = () => {
     return (
       <div className="d-flex justify-content-center align-items-center">
         <div className="text-center">
-          {/* <h1>Learn News Page</h1> */}
-          <div className="">
-            {loading ? "Loading..." : `Error: ${error}`}
-          </div>
+          <div className="">{loading ? "Loading..." : `Error: ${error}`}</div>
         </div>
       </div>
     );
   }
-
 
   return (
     <div className="d-flex justify-content-center align-items-center">
@@ -56,7 +72,14 @@ const LearnNewsPage: React.FC = () => {
         <ul className="list-unstyled">
           {newsData.map((newsItem) => (
             <li key={newsItem.id} className="mb-3">
-              <div className="news-item rounded p-3 text-left">{newsItem.title}</div>
+              <a href={newsItem.link} className="news-title" target="_blank">
+                <div className="news-item rounded p-3 text-left d-flex justify-content-between align-items-center">
+                  {newsItem.title}
+                  <span className="news-date">
+                    {formatChineseDate(newsItem.time)}
+                  </span>
+                </div>
+              </a>
             </li>
           ))}
         </ul>

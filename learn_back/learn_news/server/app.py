@@ -24,7 +24,7 @@ def hello_world():
 def get_recent_news(amount):
     try:
         cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-        sql = "SELECT id, title, time FROM `news` ORDER BY `time` DESC LIMIT " + str(amount)
+        sql = "SELECT id, title, time, link FROM `news` ORDER BY `time` DESC LIMIT " + str(amount)
         cur.execute(sql)
         results = cur.fetchall()  # Fetch all results
         cur.close()  # Close the cursor

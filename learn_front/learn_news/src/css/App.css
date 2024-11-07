@@ -49,3 +49,14 @@ body {
 .transparent-container {
   background-color: rgba(0, 0, 0, 0.5); /* 半透明黑色背景 */
 }
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.content-container {
+  flex: 1;
+  padding-top: 60px; /* 调整这个值以匹配你的 Navbar 高度 */
+}

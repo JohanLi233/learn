@@ -1,6 +1,25 @@
 .news-item {
-    border: 1px solid #ccc; /* 边框 */
-    padding: 10px;          /* 内边距 */
-    text-align: left;       /* 左对齐 */
-  }
+  display: flex;
+  transition: background-color 0.3s;
+  align-items: center;
+  border: 1px solid #ccc; /* 边框 */
+  padding: 10px; /* 内边距 */
+  text-align: left; /* 左对齐 */
+}
   
+.news-item:hover {
+  background-color: #686868;
+}
+
+.news-title {
+  color: #ffffff;
+  text-decoration: none;
+  flex-grow: 1;
+  text-align: left;
+}
+
+.news-date {
+  color: #ffffff;
+  font-size: 0.9em;
+  margin-left: 15px;
+}

@@ -90,7 +90,12 @@ def parse_main_page(html, year):
         datetime_obj = datetime.strptime(datetime_str, "%Y-%m-%d %H:%M")
         formatted_time = datetime_obj.strftime("%Y-%m-%d %H:%M:%S")
         news_items.append(
-            {"category": category, "title": title_text, "link": link, "time": formatted_time}
+            {
+                "category": category,
+                "title": title_text,
+                "link": link,
+                "time": formatted_time,
+            }
         )
     return news_items
 
@@ -151,8 +156,8 @@ def save_to_mysql(data):
 
 def generate_dates(year):
     """生成指定年份的所有日期"""
-    start_date = datetime(year, 11, 4)
-    end_date = datetime(year, 11, 4)
+    start_date = datetime(year, 11, 7)
+    end_date = datetime(year, 11, 7)
     delta = timedelta(days=1)
     current_date = start_date
     while current_date <= end_date:
