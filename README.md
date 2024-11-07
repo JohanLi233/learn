@@ -12,4 +12,4 @@
 
 项目更新中...
 # 暂时进度
-<img width="1770" alt="image" src="https://github.com/user-attachments/assets/a41091fe-c1dd-44ce-9e8d-0101c9bff514">
+[<img width="1770" alt="image" src="https://github.com/user-attachments/assets/a41091fe-c1dd-44ce-9e8d-0101c9bff514">](https://github.com/JohanLi233/learn/blob/main/assets/progress1.png)
