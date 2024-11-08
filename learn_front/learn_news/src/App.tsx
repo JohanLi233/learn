@@ -1,22 +1,27 @@
 // App.tsx
 import { Route, Routes } from "react-router-dom";
-import LearnNewsPage from "./LearnNewsPage";
-import Navbar from "./Navbar";
-import "./css/App.css";
-import Home from "./Home";
+import { BrowserRouter as Router } from "react-router-dom";
+import LearnNewsPage from "./pages/LearnNewsPage";
+import Navbar from "./components/Navbar";
+import Home from "./pages/Home";
+import PageFoot from "./components/PageFoot";
 
-function App() {
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./css/App.css";
+
+export default function App() {
   return (
-    <div className="app-container" style={{ minHeight: "100vh" }}>
+    <Router>
       <Navbar />
-      <div className="content-container transparent-container text-white p-20">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/learn-news" element={<LearnNewsPage />} />
-        </Routes>
+      <div className="app-container d-flex flex-column min-vh-100">
+        <div className="content-container flex-grow-1 transparent-container text-white p-20">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/learn-news" element={<LearnNewsPage />} />
+          </Routes>
+        </div>
       </div>
-    </div>
+      <PageFoot />
+    </Router>
   );
 }
-
-export default App;

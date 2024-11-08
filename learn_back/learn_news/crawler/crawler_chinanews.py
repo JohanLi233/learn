@@ -156,8 +156,8 @@ def save_to_mysql(data):
 
 def generate_dates(year):
     """生成指定年份的所有日期"""
-    start_date = datetime(year, 11, 7)
-    end_date = datetime(year, 11, 7)
+    start_date = datetime(year, 11, 8)
+    end_date = datetime(year, 11, 8)
     delta = timedelta(days=1)
     current_date = start_date
     while current_date <= end_date:
